@@ -4,23 +4,25 @@
 
 This project contains a PHP script for scraping smartphone data from a specified website. The data is fetched, processed, and saved to a JSON file.
 
-## Installation
+### Requirements
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/mohammedasu/smartphone-scraper-script.git
-   cd your-repository-directory
+* PHP 7.4+
+* Composer
 
-2. Install dependencies:
-    bash
-    composer install
+### Setup
+
+```
+git clone https://github.com/mohammedasu/smartphone-scraper-script.git
+cd smartphone-scraper-script
+composer install
 ```
 
-## Running the Scraper
-php src/Scrape.php
+To run the scrape you can use `php src/Scrape.php`
+```
 
-## Testing
-*Test cases are written using Pest. To run tests:
+### Testing
+
+* Test cases are written using Pest. To run tests:
     ```
     Install Pest if not already installed:
         composer require pestphp/pest --dev
