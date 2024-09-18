@@ -7,20 +7,21 @@ This project contains a PHP script for scraping smartphone data from a specified
 ## Installation
 
 1. Clone the repository:
-   bash
-   git clone https://your-repository-url.git
+   ```
+   git clone https://github.com/mohammedasu/smartphone-scraper-script.git
    cd your-repository-directory
 
 2. Install dependencies:
     bash
     composer install
+```
 
 ## Running the Scraper
 php src/Scrape.php
 
 ## Testing
-Test cases are written using PHPUnit. To run tests:
-    ```bash
+*Test cases are written using Pest. To run tests:
+    ```
     Install Pest if not already installed:
         composer require pestphp/pest --dev
     Initialize the Pest:
@@ -29,4 +30,5 @@ Test cases are written using PHPUnit. To run tests:
         composer require --dev mockery/mockery
     Run the tests:
         ./vendor/bin/pest
+    ```
 
