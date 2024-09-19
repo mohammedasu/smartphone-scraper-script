@@ -106,7 +106,19 @@ class Scrape
             $productId = md5($title . $capacityGB . $colour);
             if (!isset($this->productIds[$productId])) {
                 $this->productIds[$productId] = true;
-                $this->products[] = new Product($title . ' ' . $capacityGB, $price, $imageUrl, $capacityMB, $colour, $availabilityText, $isAvailable, $shippingText, $shippingDate);
+
+                $productData = [
+                    'title' => $title . ' ' . $capacityGB,
+                    'price' => $price,
+                    'imageUrl' => $imageUrl,
+                    'capacityMB' => $capacityMB,
+                    'colour' => $colour,
+                    'availabilityText' => $availabilityText,
+                    'isAvailable' => $isAvailable,
+                    'shippingText' => $shippingText,
+                    'shippingDate' => $shippingDate,
+                ];
+                $this->products[] = new Product($productData);
             }
         });
     }
