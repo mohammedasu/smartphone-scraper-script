@@ -137,7 +137,7 @@ class Scrape
      */
     public function saveToFile(string $filename): void
     {
-        file_put_contents($filename, json_encode(array_map(fn($product) => $product->toArray(), $this->products), JSON_PRETTY_PRINT));
+        file_put_contents($filename, json_encode(array_map(fn($product) => $product->toArray(), $this->products), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     }
 }
 

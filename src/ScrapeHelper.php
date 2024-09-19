@@ -57,7 +57,7 @@ class ScrapeHelper
     public static function getFullImageUrlFromSource(Crawler $node): string
     {
         $src = $node->filter(self::PRODUCT_IMAGE_SELECTOR)->attr('src');
-        return self::IMAGE_BASE_URL . str_replace(['..', '\\/'], ['', '/'], $src);
+        return self::IMAGE_BASE_URL . str_replace('..', '', $src);
     }
 
     /**
@@ -118,6 +118,11 @@ class ScrapeHelper
         if (preg_match('/(\d{1,2}(?:st|nd|rd|th)? \w+ \d{4})/', $shippingText, $matches) ||
             preg_match('/(\d{1,2} \w+ \d{4})/', $shippingText, $matches)) {
             return date('Y-m-d', strtotime($matches[1]));
+        }
+
+        // Handle relative dates like "tomorrow"
+        if (stripos($shippingText, 'tomorrow') !== false) {
+            return date('Y-m-d', strtotime('tomorrow')); // Return tomorrow's date
         }
 
         return null;
