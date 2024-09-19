@@ -17,15 +17,8 @@ class Product
     /**
      * Constructor to initialize product properties.
      *
-     * @param string $title
-     * @param float $price
-     * @param string $imageUrl
-     * @param int $capacityMB
-     * @param string $colour
-     * @param string $availabilityText
-     * @param bool $isAvailable
-     * @param string $shippingText
-     * @param ?string $shippingDate
+     * @param array $data
+     *
      */
     public function __construct(array $data) {
         $this->title = $data['title'];
