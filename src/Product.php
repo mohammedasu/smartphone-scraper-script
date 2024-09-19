@@ -17,8 +17,17 @@ class Product
     /**
      * Constructor to initialize product properties.
      *
-     * @param array $data
-     *
+     * @param array{
+ *     title: string,
+ *     price: float,
+ *     imageUrl: string,
+ *     capacityMB: int,
+ *     colour:  string,
+ *     availabilityText: string,
+ *     isAvailable: bool,
+ *     shippingText: string,
+ *     shippingDate?: string|null
+ * } $data
      */
     public function __construct(array $data) {
         $this->title = $data['title'];
@@ -29,13 +38,23 @@ class Product
         $this->availabilityText = $data['availabilityText'];
         $this->isAvailable = $data['isAvailable'];
         $this->shippingText = $data['shippingText'];
-        $this->shippingDate = $data['shippingDate'];
+        $this->shippingDate = $data['shippingDate'] ?? null;
     }
 
     /**
      * Converts the product properties to an associative array.
      *
-     * @return array
+     * @return array{
+     *     title: string,
+     *     price: float,
+     *     imageUrl: string,
+     *     capacityMB: int,
+     *     colour:  string,
+     *     availabilityText: string,
+     *     isAvailable: bool,
+     *     shippingText: string,
+     *     shippingDate: string|null
+     * }
      */
     public function toArray(): array
     {

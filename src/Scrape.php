@@ -15,7 +15,14 @@ class Scrape
     public const BASE_URL = 'https://www.magpiehq.com/developer-challenge/smartphones';
     private const IMAGE_BASE_URL = 'https://www.magpiehq.com/developer-challenge';
     
+    /**
+     * @var Product[] $products
+     */
     public array $products = [];
+
+    /**
+     * @var array<string, bool> $productIds
+     */
     private array $productIds = [];
 
     /**
@@ -211,7 +218,10 @@ class Scrape
         $shippingText = $this->extractShippingText($node);
         $matches = [];
         if (preg_match('/(\d{1,2}\s\w+\s\d{4})/', $shippingText, $matches)) {
-            return date('Y-m-d', strtotime($matches[1]));
+            $timestamp = strtotime($matches[1]);
+            if ($timestamp !== false) {
+                return date('Y-m-d', $timestamp);
+            }
         }
         return null;
     }
