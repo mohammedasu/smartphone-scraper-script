@@ -40,7 +40,7 @@
         "colour": "Sky Blue",
         "availabilityText": "In Stock Online",
         "isAvailable": true,
-        "shippingText": "Delivery by Thursday 19th Sep 2024",
+        "shippingText": "Delivery by 2024-09-20",
         "shippingDate": null
     },
     {
@@ -51,8 +51,8 @@
         "colour": "Grey",
         "availabilityText": "In Stock",
         "isAvailable": true,
-        "shippingText": "Available on 25 Sep 2024",
-        "shippingDate": "2024-09-25"
+        "shippingText": "Available on 26 Sep 2024",
+        "shippingDate": "2024-09-26"
     },
     {
         "title": "Huawei P30 Pro 128GB",
@@ -73,7 +73,7 @@
         "colour": "Orange",
         "availabilityText": "Out of Stock",
         "isAvailable": false,
-        "shippingText": "Delivery from 2024-10-18",
+        "shippingText": "Delivery from Saturday 19th Oct 2024",
         "shippingDate": null
     },
     {
@@ -84,7 +84,7 @@
         "colour": "Yellow",
         "availabilityText": "Out of Stock",
         "isAvailable": false,
-        "shippingText": "Delivery from 2024-10-18",
+        "shippingText": "Delivery from Saturday 19th Oct 2024",
         "shippingDate": null
     },
     {
@@ -95,7 +95,7 @@
         "colour": "Grey",
         "availabilityText": "Out of Stock",
         "isAvailable": false,
-        "shippingText": "Delivery from 2024-10-18",
+        "shippingText": "Delivery from Saturday 19th Oct 2024",
         "shippingDate": null
     },
     {
@@ -106,7 +106,7 @@
         "colour": "Blue",
         "availabilityText": "Out of Stock",
         "isAvailable": false,
-        "shippingText": "Delivery from 2024-10-18",
+        "shippingText": "Delivery from Saturday 19th Oct 2024",
         "shippingDate": null
     },
     {
@@ -117,8 +117,8 @@
         "colour": "Black",
         "availabilityText": "In Stock",
         "isAvailable": true,
-        "shippingText": "Delivers 18 Sep 2024",
-        "shippingDate": "2024-09-18"
+        "shippingText": "Delivers Thursday 19th Sep 2024",
+        "shippingDate": null
     },
     {
         "title": "Sony Xperia 10 32 GB",
@@ -150,8 +150,8 @@
         "colour": "Black",
         "availabilityText": "In Stock",
         "isAvailable": true,
-        "shippingText": "Free Delivery 19 Sep 2024",
-        "shippingDate": "2024-09-19"
+        "shippingText": "Free Delivery 20 Sep 2024",
+        "shippingDate": "2024-09-20"
     },
     {
         "title": "Oppo Reno4 Pro 5G 64 GB",
@@ -183,8 +183,8 @@
         "colour": "Black",
         "availabilityText": "In Stock",
         "isAvailable": true,
-        "shippingText": "Delivers Wednesday 18th Sep 2024",
-        "shippingDate": null
+        "shippingText": "Delivers 19 Sep 2024",
+        "shippingDate": "2024-09-19"
     },
     {
         "title": "Google Pixel 4 64 GB",
@@ -194,8 +194,8 @@
         "colour": "White",
         "availabilityText": "In Stock",
         "isAvailable": true,
-        "shippingText": "Delivers Wednesday 18th Sep 2024",
-        "shippingDate": null
+        "shippingText": "Delivers 19 Sep 2024",
+        "shippingDate": "2024-09-19"
     },
     {
         "title": "LG K42 128 GB",
@@ -205,7 +205,18 @@
         "colour": "Black",
         "availabilityText": "In Stock",
         "isAvailable": true,
-        "shippingText": "Order within 6 hours and have it 20 Sep 2024",
-        "shippingDate": "2024-09-20"
+        "shippingText": "Order within 6 hours and have it 21 Sep 2024",
+        "shippingDate": "2024-09-21"
+    },
+    {
+        "title": "Samsung Galaxy S20 64GB",
+        "price": 799.99,
+        "imageUrl": "https:\/\/www.magpiehq.com\/developer-challenge\/images\/s-20.png",
+        "capacityMB": 65536,
+        "colour": "Grey",
+        "availabilityText": "In Stock",
+        "isAvailable": true,
+        "shippingText": "Free Delivery Friday 20th Sep 2024",
+        "shippingDate": null
     }
 ]
