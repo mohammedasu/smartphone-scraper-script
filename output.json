@@ -40,7 +40,7 @@
         "colour": "Sky Blue",
         "availabilityText": "In Stock Online",
         "isAvailable": true,
-        "shippingText": "Delivery by Friday 20th Sep 2024",
+        "shippingText": "Delivery by 20 Sep 2024",
         "shippingDate": "2024-09-20"
     },
     {
@@ -51,7 +51,7 @@
         "colour": "Grey",
         "availabilityText": "In Stock",
         "isAvailable": true,
-        "shippingText": "Available on 2024-09-26",
+        "shippingText": "Available on 26 Sep 2024",
         "shippingDate": "2024-09-26"
     },
     {
@@ -73,7 +73,7 @@
         "colour": "Orange",
         "availabilityText": "Out of Stock",
         "isAvailable": false,
-        "shippingText": "Delivery from Saturday 19th Oct 2024",
+        "shippingText": "Delivery from 2024-10-19",
         "shippingDate": "2024-10-19"
     },
     {
@@ -84,7 +84,7 @@
         "colour": "Yellow",
         "availabilityText": "Out of Stock",
         "isAvailable": false,
-        "shippingText": "Delivery from Saturday 19th Oct 2024",
+        "shippingText": "Delivery from 2024-10-19",
         "shippingDate": "2024-10-19"
     },
     {
@@ -95,7 +95,7 @@
         "colour": "Grey",
         "availabilityText": "Out of Stock",
         "isAvailable": false,
-        "shippingText": "Delivery from Saturday 19th Oct 2024",
+        "shippingText": "Delivery from 2024-10-19",
         "shippingDate": "2024-10-19"
     },
     {
@@ -106,7 +106,7 @@
         "colour": "Blue",
         "availabilityText": "Out of Stock",
         "isAvailable": false,
-        "shippingText": "Delivery from Saturday 19th Oct 2024",
+        "shippingText": "Delivery from 2024-10-19",
         "shippingDate": "2024-10-19"
     },
     {
@@ -150,7 +150,7 @@
         "colour": "Black",
         "availabilityText": "In Stock",
         "isAvailable": true,
-        "shippingText": "Free Delivery 20 Sep 2024",
+        "shippingText": "Free Delivery Friday 20th Sep 2024",
         "shippingDate": "2024-09-20"
     },
     {
@@ -183,7 +183,7 @@
         "colour": "Black",
         "availabilityText": "In Stock",
         "isAvailable": true,
-        "shippingText": "Delivers Thursday 19th Sep 2024",
+        "shippingText": "Delivers 19 Sep 2024",
         "shippingDate": "2024-09-19"
     },
     {
@@ -194,7 +194,7 @@
         "colour": "White",
         "availabilityText": "In Stock",
         "isAvailable": true,
-        "shippingText": "Delivers Thursday 19th Sep 2024",
+        "shippingText": "Delivers 19 Sep 2024",
         "shippingDate": "2024-09-19"
     },
     {
@@ -205,7 +205,7 @@
         "colour": "Black",
         "availabilityText": "In Stock",
         "isAvailable": true,
-        "shippingText": "Order within 6 hours and have it Saturday 21st Sep 2024",
+        "shippingText": "Order within 6 hours and have it 21 Sep 2024",
         "shippingDate": "2024-09-21"
     },
     {

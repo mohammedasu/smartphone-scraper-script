@@ -13,8 +13,7 @@ use Exception;
 class Scrape
 {
     public const BASE_URL = 'https://www.magpiehq.com/developer-challenge/smartphones';
-    private const IMAGE_BASE_URL = 'https://www.magpiehq.com/developer-challenge';
-    
+
     /**
      * @var Product[] $products
      */
@@ -34,7 +33,7 @@ class Scrape
     {
         $currentPage = 1;
         $totalPages = $this->getTotalPages(self::BASE_URL);
-        
+
         while ($currentPage <= $totalPages) {
             $url = $this->buildUrl(self::BASE_URL, $currentPage);
             try {
@@ -97,18 +96,18 @@ class Scrape
      */
     private function extractProductVariants(Crawler $node): void
     {
-        $title = $this->extractTitle($node);
-        $price = $this->extractPrice($node);
-        $imageUrl = $this->getFullImageUrlFromSource($node->filter('img')->attr('src'));
-        $capacityMB = $this->convertCapacityToMB($node->filter('.product-capacity')->text());
+        $title = ScrapeHelper::extractTitle($node);
+        $price = ScrapeHelper::extractPrice($node);
+        $imageUrl = ScrapeHelper::getFullImageUrlFromSource($node);
+        $capacityMB = ScrapeHelper::convertCapacityToMB($node);
         $capacityGB = $node->filter('.product-capacity')->text();
-        
+
         $node->filter('span[data-colour]')->each(function (Crawler $colourNode) use ($node, $title, $price, $imageUrl, $capacityMB, $capacityGB) {
             $colour = $colourNode->attr('data-colour');
-            $availabilityText = $this->extractAvailabilityText($node);
+            $availabilityText = ScrapeHelper::extractAvailabilityText($node);
             $isAvailable = strpos($availabilityText, 'In Stock') !== false;
-            $shippingText = $this->extractShippingText($node);
-            $shippingDate = $this->extractShippingDate($node);
+            $shippingText = ScrapeHelper::extractShippingText($node);
+            $shippingDate = ScrapeHelper::extractShippingDate($node);
 
             $productId = md5($title . $capacityGB . $colour);
             if (!isset($this->productIds[$productId])) {
@@ -131,111 +130,6 @@ class Scrape
     }
 
     /**
-     * Builds full image URL from the source.
-     *
-     * @param string $src
-     * @return string
-     */
-    public function getFullImageUrlFromSource(string $src): string
-    {
-        $src = str_replace(['..', '\\/'], ['', '/'], $src);
-        return self::IMAGE_BASE_URL . $src;
-    }
-
-    /**
-     * Extracts the product title.
-     *
-     * @param Crawler $node
-     * @return string
-     */
-    public function extractTitle(Crawler $node): string
-    {
-        return trim($node->filter('.product-name')->text());
-    }
-
-    /**
-     * Extracts the product price.
-     *
-     * @param Crawler $node
-     * @return float
-     */
-    public function extractPrice(Crawler $node): float
-    {
-        $priceText = $node->filter('.my-8.text-lg')->text();
-        return (float) str_replace(['£', ' '], '', $priceText);
-    }
-
-    /**
-     * Converts device capacity to MB.
-     *
-     * @param string $capacityText
-     * @return int
-     */
-    public function convertCapacityToMB(string $capacityText): int
-    {
-        if (strpos($capacityText, 'GB') !== false) {
-            $capacityGB = (int) str_replace('GB', '', $capacityText);
-            return $capacityGB * 1024;
-        }
-        return (int) str_replace('MB', '', $capacityText);
-    }
-
-    /**
-     * Extracts the availability text.
-     *
-     * @param Crawler $node
-     * @return string
-     */
-    public function extractAvailabilityText(Crawler $node): string
-    {
-        $availabilityText = trim($node->filter('.my-4.text-sm.block.text-center')->first()->text());
-        // Check if it contains "Availability: "
-        if (strpos($availabilityText, 'Availability: ') !== false) {
-            return str_replace('Availability: ', '', $availabilityText);
-        }
-        return $availabilityText; // Return as is if not found
-    }
-
-    /**
-     * Extracts the shipping text.
-     *
-     * @param Crawler $node
-     * @return string
-     */
-    public function extractShippingText(Crawler $node): string
-    {
-        return trim($node->filter('.my-4.text-sm.block.text-center')->last()->text());
-    }
-
-    /**
-     * Extracts the shipping date from the shipping text.
-     *
-     * @param Crawler $node
-     * @return ?string
-     */
-    public function extractShippingDate(Crawler $node): ?string
-    {
-        $shippingText = $this->extractShippingText($node);
-
-        // Match the ISO date format (YYYY-MM-DD)
-        if (preg_match('/\d{4}-\d{2}-\d{2}/', $shippingText, $matches)) {
-            return $matches[0];
-        }
-
-        // Match the descriptive date format (e.g., "20th Sep 2024")
-        if (preg_match('/(\d{1,2}(?:st|nd|rd|th)? \w+ \d{4})/', $shippingText, $matches)) {
-            return date('Y-m-d', strtotime($matches[1]));
-        }
-
-        // Match alternative descriptive format (e.g., "20 Sep 2024")
-        if (preg_match('/(\d{1,2} \w+ \d{4})/', $shippingText, $matches)) {
-            return date('Y-m-d', strtotime($matches[1]));
-        }
-
-        return null;
-    }
-
-    /**
      * Saves the extracted products to a JSON file.
      *
      * @param string $filename
@@ -247,5 +141,6 @@ class Scrape
     }
 }
 
+// Run the scraper
 $scrape = new Scrape();
 $scrape->run();
