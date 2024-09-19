@@ -138,8 +138,8 @@ class Scrape
      */
     public function getFullImageUrlFromSource(string $src): string
     {
-        $src = str_replace('../', '/', $src);
-        return self::IMAGE_BASE_URL . str_replace('\\/', '/', $src);
+        $src = str_replace(['..', '\\/'], ['', '/'], $src);
+        return self::IMAGE_BASE_URL . $src;
     }
 
     /**
@@ -216,13 +216,22 @@ class Scrape
     public function extractShippingDate(Crawler $node): ?string
     {
         $shippingText = $this->extractShippingText($node);
-        $matches = [];
-        if (preg_match('/(\d{1,2}\s\w+\s\d{4})/', $shippingText, $matches)) {
-            $timestamp = strtotime($matches[1]);
-            if ($timestamp !== false) {
-                return date('Y-m-d', $timestamp);
-            }
+
+        // Match the ISO date format (YYYY-MM-DD)
+        if (preg_match('/\d{4}-\d{2}-\d{2}/', $shippingText, $matches)) {
+            return $matches[0];
         }
+
+        // Match the descriptive date format (e.g., "20th Sep 2024")
+        if (preg_match('/(\d{1,2}(?:st|nd|rd|th)? \w+ \d{4})/', $shippingText, $matches)) {
+            return date('Y-m-d', strtotime($matches[1]));
+        }
+
+        // Match alternative descriptive format (e.g., "20 Sep 2024")
+        if (preg_match('/(\d{1,2} \w+ \d{4})/', $shippingText, $matches)) {
+            return date('Y-m-d', strtotime($matches[1]));
+        }
+
         return null;
     }
 
