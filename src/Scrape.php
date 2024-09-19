@@ -104,28 +104,32 @@ class Scrape
 
         $node->filter('span[data-colour]')->each(function (Crawler $colourNode) use ($node, $title, $price, $imageUrl, $capacityMB, $capacityGB) {
             $colour = $colourNode->attr('data-colour');
+            $productId = md5($title . $capacityGB . $colour);
+
+            if (isset($this->productIds[$productId])) {
+                return;
+            }
+
             $availabilityText = ScrapeHelper::extractAvailabilityText($node);
             $isAvailable = strpos($availabilityText, 'In Stock') !== false;
             $shippingText = ScrapeHelper::extractShippingText($node);
             $shippingDate = ScrapeHelper::extractShippingDate($node);
 
-            $productId = md5($title . $capacityGB . $colour);
-            if (!isset($this->productIds[$productId])) {
-                $this->productIds[$productId] = true;
+        
+            $this->productIds[$productId] = true;
 
-                $productData = [
-                    'title' => $title . ' ' . $capacityGB,
-                    'price' => $price,
-                    'imageUrl' => $imageUrl,
-                    'capacityMB' => $capacityMB,
-                    'colour' => $colour,
-                    'availabilityText' => $availabilityText,
-                    'isAvailable' => $isAvailable,
-                    'shippingText' => $shippingText,
-                    'shippingDate' => $shippingDate,
-                ];
-                $this->products[] = new Product($productData);
-            }
+            $productData = [
+                'title' => $title . ' ' . $capacityGB,
+                'price' => $price,
+                'imageUrl' => $imageUrl,
+                'capacityMB' => $capacityMB,
+                'colour' => $colour,
+                'availabilityText' => $availabilityText,
+                'isAvailable' => $isAvailable,
+                'shippingText' => $shippingText,
+                'shippingDate' => $shippingDate,
+            ];
+            $this->products[] = new Product($productData);
         });
     }
 
