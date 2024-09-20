@@ -98,13 +98,13 @@ class Scrape
     {
         $title = ScrapeHelper::extractTitle($node);
         $price = ScrapeHelper::extractPrice($node);
-        $imageUrl = ScrapeHelper::getFullImageUrlFromSource($node);
-        $capacityMB = ScrapeHelper::convertCapacityToMB($node);
-        $capacityGB = $node->filter('.product-capacity')->text();
+        $imageUrl = ScrapeHelper::getFullImageUrlFromSource($node->filter('img')->attr('src'));
+        $capacityText = $node->filter('.product-capacity')->text();
+        $capacityMB = ScrapeHelper::convertCapacityToMB($capacityText);
 
-        $node->filter('span[data-colour]')->each(function (Crawler $colourNode) use ($node, $title, $price, $imageUrl, $capacityMB, $capacityGB) {
+        $node->filter('span[data-colour]')->each(function (Crawler $colourNode) use ($node, $title, $price, $imageUrl, $capacityMB, $capacityText) {
             $colour = $colourNode->attr('data-colour');
-            $productId = md5($title . $capacityGB . $colour);
+            $productId = md5($title . $capacityText . $colour);
 
             if (isset($this->productIds[$productId])) {
                 return;
@@ -113,13 +113,13 @@ class Scrape
             $availabilityText = ScrapeHelper::extractAvailabilityText($node);
             $isAvailable = strpos($availabilityText, 'In Stock') !== false;
             $shippingText = ScrapeHelper::extractShippingText($node);
-            $shippingDate = ScrapeHelper::extractShippingDate($node);
+            $shippingDate = ScrapeHelper::extractShippingDate($shippingText);
 
         
             $this->productIds[$productId] = true;
 
             $productData = [
-                'title' => $title . ' ' . $capacityGB,
+                'title' => "$title $capacityText",
                 'price' => $price,
                 'imageUrl' => $imageUrl,
                 'capacityMB' => $capacityMB,
@@ -127,7 +127,7 @@ class Scrape
                 'availabilityText' => $availabilityText,
                 'isAvailable' => $isAvailable,
                 'shippingText' => $shippingText,
-                'shippingDate' => $shippingDate,
+                'shippingDate' => $shippingDate ?? 'N/A',
             ];
             $this->products[] = new Product($productData);
         });

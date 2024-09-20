@@ -10,8 +10,6 @@ class ScrapeHelper
 
     public const PRODUCT_NAME_SELECTOR = '.product-name';
     public const PRODUCT_PRICE_SELECTOR = '.my-8.text-lg';
-    public const PRODUCT_CAPACITY_SELECTOR = '.product-capacity';
-    public const PRODUCT_IMAGE_SELECTOR = 'img';
     public const AVAILABILITY_SELECTOR = '.my-4.text-sm.block.text-center';
     public const SHIPPING_SELECTOR = '.my-4.text-sm.block.text-center';
     public const IMAGE_BASE_URL = 'https://www.magpiehq.com/developer-challenge';
@@ -54,9 +52,8 @@ class ScrapeHelper
      * @param string $src
      * @return string
      */
-    public static function getFullImageUrlFromSource(Crawler $node): string
+    public static function getFullImageUrlFromSource(String $src): string
     {
-        $src = $node->filter(self::PRODUCT_IMAGE_SELECTOR)->attr('src');
         return self::IMAGE_BASE_URL . str_replace('..', '', $src);
     }
 
@@ -66,9 +63,8 @@ class ScrapeHelper
      * @param string $capacityText
      * @return int
      */
-    public static function convertCapacityToMB(Crawler $node): int
+    public static function convertCapacityToMB(string $capacityText): int
     {
-        $capacityText = $node->filter(self::PRODUCT_CAPACITY_SELECTOR)->text();
         if (strpos($capacityText, 'GB') !== false) {
             $capacityGB = (int) str_replace('GB', '', $capacityText);
             return $capacityGB * 1024;
@@ -105,10 +101,8 @@ class ScrapeHelper
      * @param Crawler $node
      * @return ?string
      */
-    public static function extractShippingDate(Crawler $node): ?string
+    public static function extractShippingDate(String $shippingText): ?string
     {
-        $shippingText = self::extractShippingText($node);
-        
         // Match ISO date format (YYYY-MM-DD)
         if (preg_match('/\d{4}-\d{2}-\d{2}/', $shippingText, $matches)) {
             return $matches[0];
