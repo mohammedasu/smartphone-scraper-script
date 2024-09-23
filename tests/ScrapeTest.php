@@ -1,6 +1,7 @@
 <?php
 
 use App\Scrape;
+use App\ScrapeHelper;
 use Symfony\Component\DomCrawler\Crawler;
 
 beforeEach(function () {
@@ -21,30 +22,29 @@ it('builds the correct URL for pagination', function () {
 
 it('correctly extracts the product title', function () {
     $node = new Crawler('<div class="product"><span class="product-name">Test Product</span></div>');
-    $title = $this->scrape->extractTitle($node);
+    $title = ScrapeHelper::extractTitle($node);
     expect($title)->toBe('Test Product');
 });
 
 it('correctly extracts the product price', function () {
     $node = new Crawler('<div class="product"><span class="my-8 text-lg">£499.99</span></div>');
-    $price = $this->scrape->extractPrice($node);
+    $price = ScrapeHelper::extractPrice($node);
     expect($price)->toBe(499.99);
 });
 
 it('converts GB to MB correctly', function () {
-    $capacityMB = $this->scrape->convertCapacityToMB('32GB');
+    $capacityMB = ScrapeHelper::convertCapacityToMB('32GB');
     expect($capacityMB)->toBe(32768);
 });
 
 it('handles availability text extraction', function () {
     $node = new Crawler('<div class="product"><span class="my-4 text-sm block text-center">Availability: In Stock</span></div>');
-    $availabilityText = $this->scrape->extractAvailabilityText($node);
+    $availabilityText = ScrapeHelper::extractAvailabilityText($node);
     expect($availabilityText)->toBe('In Stock');
 });
 
 it('extracts shipping date correctly', function () {
-    $node = new Crawler('<div class="product"><span class="my-4 text-sm block text-center">Shipping by 12 September 2024</span></div>');
-    $shippingDate = $this->scrape->extractShippingDate($node);
+    $shippingDate = ScrapeHelper::extractShippingDate('Shipping by 12 September 2024');
     expect($shippingDate)->toBe('2024-09-12');
 });
 
